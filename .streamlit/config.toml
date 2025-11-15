@@ -1,0 +1,12 @@
+[server]
+# Use "0.0.0.0" to allow network access from other devices
+# Use "localhost" for local-only access
+address = "0.0.0.0"
+port = 8501
+
+# SSL certificates disabled for local development
+# sslCertFile = ""
+# sslKeyFile  = ""
+
+# Let Streamlit manage security defaults
+enableXsrfProtection = true
