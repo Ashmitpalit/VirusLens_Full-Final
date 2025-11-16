@@ -168,6 +168,12 @@ def get_scan(scan_id: int) -> Optional[Dict[str, Any]]:
         "updated_at": r["updated_at"],
     }
 
+def get_history(limit: int = 200) -> List[Dict[str, Any]]:
+    """
+    Alias for get_scans() for compatibility with older code.
+    """
+    return get_scans(limit=limit)
+
 def clear_history() -> None:
     conn = connect_db()
     cur = conn.cursor()
