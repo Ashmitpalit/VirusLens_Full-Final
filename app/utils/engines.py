@@ -35,7 +35,20 @@ def sha256_file(path: str) -> str:
 def vt_headers() -> Dict[str, str]:
     return {"x-apikey": get_vt_api_key()}
 
+def is_mock_mode() -> bool:
+    """Check if MOCK_MODE is enabled"""
+    return os.getenv("MOCK_MODE", "false").lower() in ("1", "true", "yes")
+
 def vt_url_report(url: str) -> Dict[str, Any]:
+    # Check for mock mode
+    if is_mock_mode():
+        # Return mock response for development/testing
+        return {
+            "engine": "VirusTotal",
+            "raw": {"data": {"id": "mock-id", "attributes": {"stats": {"malicious": 0, "harmless": 90}}}},
+            "summary": {"malicious": 0, "suspicious": 0, "undetected": 0, "harmless": 90, "timeout": 0, "categories": {}},
+        }
+    
     # VT needs an id = url_id (base64-url of the url). The simple "scan + fetch" route works too.
     s = requests.Session()
     s.headers.update(vt_headers())
@@ -90,6 +103,15 @@ def vt_url_report(url: str) -> Dict[str, Any]:
     }
 
 def vt_hash_report(hash_value: str) -> Dict[str, Any]:
+    # Check for mock mode
+    if is_mock_mode():
+        # Return mock response for development/testing
+        return {
+            "engine": "VirusTotal",
+            "raw": {"data": {"attributes": {"last_analysis_stats": {"malicious": 0, "harmless": 90}}}},
+            "summary": {"malicious": 0, "suspicious": 0, "undetected": 0, "harmless": 90, "timeout": 0},
+        }
+    
     s = requests.Session()
     s.headers.update(vt_headers())
     r = s.get(f"https://www.virustotal.com/api/v3/files/{hash_value}")
