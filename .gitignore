@@ -1,9 +1,17 @@
+# Environment variables
+.env
+.env.local
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+venv/
+.venv/
+env/
+ENV/
 build/
 develop-eggs/
 dist/
@@ -20,26 +28,10 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual Environment
-venv/
-ENV/
-env/
-.venv/
-
-# Environment variables
-.env
-.env.local
-
 # Database
 *.db
-*.db-journal
 *.sqlite
 *.sqlite3
-viruslens.db
-virustlens.db
-
-# Streamlit
-.streamlit/secrets.toml
 
 # IDE
 .vscode/
@@ -55,21 +47,11 @@ desktop.ini
 
 # Logs
 *.log
-streamlit*.log
 
-# Reports and exports
-reports/*.pdf
-exports/*.pdf
-generated_pdfs/*.pdf
-app/reports/*.pdf
-app/exports/*.pdf
-
-# Certificates
-certs/*.pem
-*.pem
-*.key
+# Streamlit
+.streamlit/secrets.toml
 
 # Temporary files
 *.tmp
-*.bak
-*.backup
+temp/
+tmp/
